@@ -25,6 +25,7 @@ final class ExcludeInternalMethodTest extends TestCase
 <?php
 
 class A {
+	/** @api */
     function method() {}
 }
 PHP
@@ -55,7 +56,6 @@ PHP
 <?php
 
 class A {
-    /** @internal */
     function method() {}
 }
 PHP
