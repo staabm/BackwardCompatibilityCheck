@@ -29,6 +29,10 @@ final class PickLastMinorVersionFromCollection implements PickVersionFromVersion
 
         $lastVersion = $versionsSortedDescending->first();
 
+        if ($lastVersion->getMajor() === 0) {
+            return $lastVersion;
+        }
+
         $matchingMinorVersions = $stableVersions
             ->matching(CompositeConstraint::and(
                 Type\instance_of(OperationConstraint::class)
