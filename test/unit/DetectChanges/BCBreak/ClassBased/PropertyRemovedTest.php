@@ -71,7 +71,10 @@ final class PropertyRemovedTest extends TestCase
 /** @api */
 final class FinalClass
 {
+	/** @api */
     public $decreasedVisibilityPublicProperty;
+    
+    /** @api */
     public $removedPublicProperty;
     protected $decreasedVisibilityProtectedProperty;
     protected $removedProtectedProperty;
@@ -88,6 +91,7 @@ PHP
 /** @api */
 final class FinalClass
 {
+	/** @api */
     protected $decreasedVisibilityPublicProperty;
     private $decreasedVisibilityProtectedProperty;
 }
@@ -106,6 +110,7 @@ PHP
 <?php
 
 trait PropertyTrait {
+	/** @api */
     protected $testProperty;
 }
 
@@ -138,6 +143,7 @@ PHP
 <?php
 
 trait PropertyTrait {
+	/** @api */
     protected $testProperty;
 }
 
