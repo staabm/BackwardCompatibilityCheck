@@ -95,7 +95,7 @@ final class ParameterDefaultValueChangedTest extends TestCase
      *     2: list<string>
      * }>
      */
-    public function functionsToBeTested(): array
+    public static function functionsToBeTested(): array
     {
         $astLocator    = (new BetterReflection())->astLocator();
         $sourceStubber = (new BetterReflection())->sourceStubber();
