@@ -2,9 +2,10 @@
 <phpunit
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
+    displayDetailsOnTestsThatTriggerDeprecations="true"
     bootstrap="test/bootstrap.php"
     colors="true"
-    convertDeprecationsToExceptions="true"
+    cacheDirectory=".phpunit.cache"
 >
     <testsuites>
         <testsuite name="unit">
@@ -15,11 +16,11 @@
         </testsuite>
     </testsuites>
 
-    <coverage processUncoveredFiles="true">
+    <source>
         <include>
-            <directory suffix=".php">./src</directory>
+            <directory>./src</directory>
         </include>
-    </coverage>
+    </source>
 
     <php>
         <ini name="error_reporting" value="E_ALL"/>
