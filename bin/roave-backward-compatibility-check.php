@@ -14,7 +14,6 @@ use Roave\BackwardCompatibility\Command;
 use Roave\BackwardCompatibility\CompareClasses;
 use Roave\BackwardCompatibility\DetectChanges\BCBreak\ClassBased;
 use Roave\BackwardCompatibility\DetectChanges\BCBreak\ClassConstantBased;
-use Roave\BackwardCompatibility\DetectChanges\BCBreak\EnumBased;
 use Roave\BackwardCompatibility\DetectChanges\BCBreak\FunctionBased;
 use Roave\BackwardCompatibility\DetectChanges\BCBreak\InterfaceBased;
 use Roave\BackwardCompatibility\DetectChanges\BCBreak\MethodBased;
@@ -313,7 +312,7 @@ use function file_exists;
                     ),
                 )),
             ))),
-            new EnumBased\CasesChanged(),
+            //            new EnumBased\CasesChanged(), // temp removed to check if it affects the infection result
         ),
     );
 
