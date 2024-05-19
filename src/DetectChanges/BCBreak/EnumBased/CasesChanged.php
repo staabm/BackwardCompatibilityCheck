@@ -39,6 +39,7 @@ class CasesChanged implements EnumBased
             },
         );
 
+
         $removedCases = array_filter(
             $fromEnum->getCases(),
             static function (ReflectionEnumCase $case) use ($toEnum): bool {
@@ -50,23 +51,23 @@ class CasesChanged implements EnumBased
             },
         );
 
-        $caseRemovedChanges = array_values(array_map(
+        $caseRemovedChanges = array_map(
             static function (ReflectionEnumCase $case) use ($fromEnumName): Change {
                 $caseName = $case->getName();
 
                 return Change::removed('Case ' . $fromEnumName . '::' . $caseName . ' was removed');
             },
             $removedCases,
-        ));
+        );
 
-        $caseAddedChanges = array_values(array_map(
+        $caseAddedChanges = array_map(
             static function (ReflectionEnumCase $case) use ($fromEnumName): Change {
                 $caseName = $case->getName();
 
                 return Change::added('Case ' . $fromEnumName . '::' . $caseName . ' was added');
             },
             $addedCases,
-        ));
+        );
 
         return Changes::fromList(...$caseRemovedChanges, ...$caseAddedChanges);
     }
