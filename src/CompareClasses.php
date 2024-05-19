@@ -21,7 +21,7 @@ final class CompareClasses implements CompareApi
         private ClassBased $classBasedComparisons,
         private InterfaceBased $interfaceBasedComparisons,
         private TraitBased $traitBasedComparisons,
-        private EnumBased $enumBasedComparisons,
+        private EnumBased|null $enumBasedComparisons = null, // optional argument for now to avoid BC break
     ) {
     }
 
@@ -91,7 +91,7 @@ final class CompareClasses implements CompareApi
             return;
         }
 
-        if ($oldSymbol->isEnum()) {
+        if ($oldSymbol->isEnum() && $this->enumBasedComparisons) {
             yield from ($this->enumBasedComparisons)($oldSymbol, $newClass);
 
             return;
