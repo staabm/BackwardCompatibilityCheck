@@ -16,7 +16,6 @@ use stdClass;
 use function array_map;
 use function iterator_to_array;
 
-/** @covers \Roave\BackwardCompatibility\DetectChanges\BCBreak\EnumBased\CasesChanged */
 final class EnumCasesChangedTest extends TestCase
 {
     /**
