@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Roave\BackwardCompatibility\DetectChanges\BCBreak\ClassBased;
+namespace Roave\BackwardCompatibility\DetectChanges\BCBreak\EnumBased;
 
 use Roave\BackwardCompatibility\Change;
 use Roave\BackwardCompatibility\Changes;
@@ -10,7 +10,7 @@ use Roave\BetterReflection\Reflection\ReflectionClass;
 use Roave\BetterReflection\Reflection\ReflectionEnum;
 use Roave\BetterReflection\Reflection\ReflectionEnumCase;
 
-class EnumCaseAdded implements ClassBased
+class CaseAdded implements EnumBased
 {
     public function __invoke(ReflectionClass $fromEnum, ReflectionClass $toEnum): Changes
     {

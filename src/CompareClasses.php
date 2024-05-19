@@ -10,6 +10,7 @@ use Psl\Str;
 use Roave\BackwardCompatibility\DetectChanges\BCBreak\ClassBased\ClassBased;
 use Roave\BackwardCompatibility\DetectChanges\BCBreak\InterfaceBased\InterfaceBased;
 use Roave\BackwardCompatibility\DetectChanges\BCBreak\TraitBased\TraitBased;
+use Roave\BackwardCompatibility\DetectChanges\BCBreak\EnumBased\EnumBased;
 use Roave\BetterReflection\Reflection\ReflectionClass;
 use Roave\BetterReflection\Reflector\Exception\IdentifierNotFound;
 use Roave\BetterReflection\Reflector\Reflector;
@@ -20,6 +21,7 @@ final class CompareClasses implements CompareApi
         private ClassBased $classBasedComparisons,
         private InterfaceBased $interfaceBasedComparisons,
         private TraitBased $traitBasedComparisons,
+        private EnumBased $enumBasedComparisons,
     ) {
     }
 
@@ -85,6 +87,12 @@ final class CompareClasses implements CompareApi
 
         if ($oldSymbol->isTrait()) {
             yield from ($this->traitBasedComparisons)($oldSymbol, $newClass);
+
+            return;
+        }
+
+        if ($oldSymbol->isEnum()) {
+            yield from ($this->enumBasedComparisons)($oldSymbol, $newClass);
 
             return;
         }

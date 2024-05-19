@@ -10,6 +10,7 @@ use Roave\BackwardCompatibility\Change;
 use Roave\BackwardCompatibility\Changes;
 use Roave\BackwardCompatibility\CompareClasses;
 use Roave\BackwardCompatibility\DetectChanges\BCBreak\ClassBased\ClassBased;
+use Roave\BackwardCompatibility\DetectChanges\BCBreak\EnumBased\EnumBased;
 use Roave\BackwardCompatibility\DetectChanges\BCBreak\InterfaceBased\InterfaceBased;
 use Roave\BackwardCompatibility\DetectChanges\BCBreak\TraitBased\TraitBased;
 
@@ -27,6 +28,9 @@ final class CompareClassesTest extends TestCase
     /** @var TraitBased&MockObject */
     private TraitBased $traitBasedComparison;
 
+    /** @var EnumBased&MockObject */
+    private EnumBased $enumBasedComparison;
+
     private CompareClasses $compareClasses;
 
     public static function setUpBeforeClass(): void
@@ -41,10 +45,12 @@ final class CompareClassesTest extends TestCase
         $this->classBasedComparison     = $this->createMock(ClassBased::class);
         $this->interfaceBasedComparison = $this->createMock(InterfaceBased::class);
         $this->traitBasedComparison     = $this->createMock(TraitBased::class);
+        $this->enumBasedComparison     = $this->createMock(EnumBased::class);
         $this->compareClasses           = new CompareClasses(
             $this->classBasedComparison,
             $this->interfaceBasedComparison,
             $this->traitBasedComparison,
+            $this->enumBasedComparison,
         );
     }
 

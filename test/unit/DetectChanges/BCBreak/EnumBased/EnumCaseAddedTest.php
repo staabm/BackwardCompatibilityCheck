@@ -2,26 +2,17 @@
 
 declare(strict_types=1);
 
-namespace RoaveTest\BackwardCompatibility\DetectChanges\BCBreak\ClassBased;
+namespace RoaveTest\BackwardCompatibility\DetectChanges\BCBreak\EnumBased;
 
 use PHPUnit\Framework\TestCase;
 use Roave\BackwardCompatibility\Change;
-use Roave\BackwardCompatibility\Changes;
-use Roave\BackwardCompatibility\DetectChanges\BCBreak\ClassBased\ClassBecameTrait;
-use Roave\BackwardCompatibility\DetectChanges\BCBreak\ClassBased\EnumCaseAdded;
-use Roave\BackwardCompatibility\DetectChanges\BCBreak\ClassBased\MethodChanged;
-use Roave\BackwardCompatibility\DetectChanges\BCBreak\MethodBased\MethodBased;
+use Roave\BackwardCompatibility\DetectChanges\BCBreak\EnumBased\CaseAdded;
 use Roave\BetterReflection\BetterReflection;
 use Roave\BetterReflection\Reflection\ReflectionClass;
-use Roave\BetterReflection\Reflection\ReflectionMethod;
 use Roave\BetterReflection\Reflector\DefaultReflector;
 use Roave\BetterReflection\SourceLocator\Type\SingleFileSourceLocator;
-use Roave\BetterReflection\SourceLocator\Type\StringSourceLocator;
-use RoaveTest\BackwardCompatibility\Assertion;
 
-use function strtolower;
-
-/** @covers \Roave\BackwardCompatibility\DetectChanges\BCBreak\ClassBased\EnumCaseAdded */
+/** @covers \Roave\BackwardCompatibility\DetectChanges\BCBreak\EnumBased\CaseAdded */
 final class EnumCaseAddedTest extends TestCase
 {
     /**
@@ -35,7 +26,7 @@ final class EnumCaseAddedTest extends TestCase
         array           $expectedMessages,
     ): void
     {
-        $changes = (new EnumCaseAdded())($fromEnum, $toEnum);
+        $changes = (new CaseAdded())($fromEnum, $toEnum);
 
         self::assertSame(
             $expectedMessages,
@@ -58,11 +49,11 @@ final class EnumCaseAddedTest extends TestCase
                 (new DefaultReflector(new SingleFileSourceLocator(
                     __DIR__ . '/../../../../asset/api/old/EnumWithCasesBeingAdded.php',
                     $locator,
-                )))->reflectClass(\RoaveTestAsset\EnumWithCasesBeingAdded::class),
+                )))->reflectClass('RoaveTestAsset\EnumWithCasesBeingAdded'),
                 (new DefaultReflector(new SingleFileSourceLocator(
                     __DIR__ . '/../../../../asset/api/new/EnumWithCasesBeingAdded.php',
                     $locator,
-                )))->reflectClass(\RoaveTestAsset\EnumWithCasesBeingAdded::class),
+                )))->reflectClass('RoaveTestAsset\EnumWithCasesBeingAdded'),
                 [
                     '[BC] ADDED: Case RoaveTestAsset\EnumWithCasesBeingAdded::January was added',
                     '[BC] ADDED: Case RoaveTestAsset\EnumWithCasesBeingAdded::February was added',
