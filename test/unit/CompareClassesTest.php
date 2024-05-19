@@ -59,6 +59,7 @@ final class CompareClassesTest extends TestCase
         $this->classBasedComparatorWillBeCalled();
         $this->interfaceBasedComparatorWillNotBeCalled();
         $this->traitBasedComparatorWillNotBeCalled();
+        $this->enumBasedComparatorWillNotBeCalled();
 
         Assertion::assertChangesEqual(
             Changes::fromList(Change::changed('class change', true)),
@@ -95,6 +96,8 @@ PHP,
         $this->classBasedComparatorWillBeCalled();
         $this->interfaceBasedComparatorWillNotBeCalled();
         $this->traitBasedComparatorWillNotBeCalled();
+        $this->enumBasedComparatorWillNotBeCalled();
+
 
         Assertion::assertChangesEqual(
             Changes::fromList(Change::changed('class change', true)),
@@ -127,6 +130,8 @@ PHP,
         $this->classBasedComparatorWillNotBeCalled();
         $this->interfaceBasedComparatorWillBeCalled();
         $this->traitBasedComparatorWillNotBeCalled();
+        $this->enumBasedComparatorWillNotBeCalled();
+
 
         Assertion::assertChangesEqual(
             Changes::fromList(Change::changed('interface change', true)),
@@ -142,7 +147,9 @@ PHP,
     {
         $this->classBasedComparatorWillNotBeCalled();
         $this->interfaceBasedComparatorWillNotBeCalled();
+        $this->enumBasedComparatorWillNotBeCalled();
         $this->traitBasedComparatorWillBeCalled();
+
 
         Assertion::assertChangesEqual(
             Changes::fromList(Change::changed('trait change', true)),
@@ -154,11 +161,30 @@ PHP,
         );
     }
 
+    public function testWillRunEnumComparators(): void
+    {
+        $this->classBasedComparatorWillNotBeCalled();
+        $this->interfaceBasedComparatorWillNotBeCalled();
+        $this->enumBasedComparatorWillBeCalled();
+        $this->traitBasedComparatorWillNotBeCalled();
+
+
+        Assertion::assertChangesEqual(
+            Changes::fromList(Change::changed('enum change', true)),
+            ($this->compareClasses)(
+                (self::$stringReflectorFactory)('<?php enum A {}'),
+                (self::$stringReflectorFactory)('<?php enum A {}'),
+                (self::$stringReflectorFactory)('<?php enum A {}'),
+            ),
+        );
+    }
+
     public function testAnonymousClassesAreFilteredOut(): void
     {
         $this->classBasedComparatorWillNotBeCalled();
         $this->interfaceBasedComparatorWillNotBeCalled();
         $this->traitBasedComparatorWillNotBeCalled();
+        $this->enumBasedComparatorWillNotBeCalled();
 
         Assertion::assertChangesEqual(
             Changes::empty(),
@@ -214,6 +240,8 @@ PHP),
         $this->classBasedComparatorWillNotBeCalled();
         $this->interfaceBasedComparatorWillNotBeCalled();
         $this->traitBasedComparatorWillNotBeCalled();
+        $this->enumBasedComparatorWillNotBeCalled();
+
 
         Assertion::assertChangesEqual(
             Changes::fromList(Change::removed('Class A has been deleted', true)),
@@ -268,10 +296,27 @@ PHP),
             ->willReturn(Changes::fromList(Change::changed('trait change', true)));
     }
 
+    private function enumBasedComparatorWillBeCalled(): void
+    {
+        $this
+            ->enumBasedComparison
+            ->expects(self::atLeastOnce())
+            ->method('__invoke')
+            ->willReturn(Changes::fromList(Change::changed('enum change', true)));
+    }
+
     private function traitBasedComparatorWillNotBeCalled(): void
     {
         $this
             ->traitBasedComparison
+            ->expects(self::never())
+            ->method('__invoke');
+    }
+
+    private function enumBasedComparatorWillNotBeCalled(): void
+    {
+        $this
+            ->enumBasedComparison
             ->expects(self::never())
             ->method('__invoke');
     }
