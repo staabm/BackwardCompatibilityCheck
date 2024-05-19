@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Roave\BackwardCompatibility\DetectChanges\BCBreak\EnumBased;
 
 use Roave\BackwardCompatibility\Changes;

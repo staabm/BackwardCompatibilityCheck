@@ -45,7 +45,7 @@ final class CompareClassesTest extends TestCase
         $this->classBasedComparison     = $this->createMock(ClassBased::class);
         $this->interfaceBasedComparison = $this->createMock(InterfaceBased::class);
         $this->traitBasedComparison     = $this->createMock(TraitBased::class);
-        $this->enumBasedComparison     = $this->createMock(EnumBased::class);
+        $this->enumBasedComparison      = $this->createMock(EnumBased::class);
         $this->compareClasses           = new CompareClasses(
             $this->classBasedComparison,
             $this->interfaceBasedComparison,

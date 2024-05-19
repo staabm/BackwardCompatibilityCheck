@@ -12,6 +12,9 @@ use Roave\BetterReflection\Reflection\ReflectionClass;
 use Roave\BetterReflection\Reflector\DefaultReflector;
 use Roave\BetterReflection\SourceLocator\Type\SingleFileSourceLocator;
 
+use function array_map;
+use function iterator_to_array;
+
 /** @covers \Roave\BackwardCompatibility\DetectChanges\BCBreak\EnumBased\CasesChanged */
 final class EnumCaseAddedTest extends TestCase
 {
@@ -23,9 +26,8 @@ final class EnumCaseAddedTest extends TestCase
     public function testDiffs(
         ReflectionClass $fromEnum,
         ReflectionClass $toEnum,
-        array           $expectedMessages,
-    ): void
-    {
+        array $expectedMessages,
+    ): void {
         $changes = (new CasesChanged())($fromEnum, $toEnum);
 
         self::assertSame(
@@ -40,7 +42,7 @@ final class EnumCaseAddedTest extends TestCase
      * @return array<string, array<int, ReflectionClass|array<int, string>>>
      * @psalm-return array<string, array{0: ReflectionClass, 1: ReflectionClass, 2: list<string>}>
      */
-    public function enumsToBeTested()
+    public function enumsToBeTested(): array
     {
         $locator = (new BetterReflection())->astLocator();
 

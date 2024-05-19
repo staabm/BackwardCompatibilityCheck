@@ -11,6 +11,10 @@ use Roave\BetterReflection\Reflection\ReflectionClass;
 use Roave\BetterReflection\Reflection\ReflectionEnum;
 use Roave\BetterReflection\Reflection\ReflectionEnumCase;
 
+use function array_filter;
+use function array_map;
+use function array_values;
+
 class CasesChanged implements EnumBased
 {
     public function __invoke(ReflectionClass $fromEnum, ReflectionClass $toEnum): Changes
@@ -32,12 +36,8 @@ class CasesChanged implements EnumBased
                     return false;
                 }
 
-                if ($fromEnum->hasCase($case->getName())) {
-                    return false;
-                }
-
-                return true;
-            }
+                return ! $fromEnum->hasCase($case->getName());
+            },
         );
 
         $removedCases = array_filter(
@@ -47,24 +47,26 @@ class CasesChanged implements EnumBased
                     return false;
                 }
 
-                return !$toEnum->hasCase($case->getName());
-            }
+                return ! $toEnum->hasCase($case->getName());
+            },
         );
 
-        $caseRemovedChanges = array_values(array_map(function (ReflectionEnumCase $case) use ($fromEnumName): Change {
-            $caseName = $case->getName();
+        $caseRemovedChanges = array_values(array_map(
+            static function (ReflectionEnumCase $case) use ($fromEnumName): Change {
+                $caseName = $case->getName();
 
-            return Change::removed("Case {$fromEnumName}::{$caseName} was removed");
-        },
-            $removedCases
+                return Change::removed('Case ' . $fromEnumName . '::' . $caseName . ' was removed');
+            },
+            $removedCases,
         ));
 
-        $caseAddedChanges = array_values(array_map(function (ReflectionEnumCase $case) use ($fromEnumName): Change {
-            $caseName = $case->getName();
+        $caseAddedChanges = array_values(array_map(
+            static function (ReflectionEnumCase $case) use ($fromEnumName): Change {
+                $caseName = $case->getName();
 
-            return Change::added("Case {$fromEnumName}::{$caseName} was added");
+                return Change::added('Case ' . $fromEnumName . '::' . $caseName . ' was added');
             },
-            $addedCases
+            $addedCases,
         ));
 
         return Changes::fromList(...$caseRemovedChanges, ...$caseAddedChanges);
@@ -79,4 +81,4 @@ class CasesChanged implements EnumBased
         return $comment !== null
             && Regex\matches($comment, '/\s+@internal\s+/');
     }
-};
+}
