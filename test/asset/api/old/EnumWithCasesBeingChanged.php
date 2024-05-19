@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace RoaveTestAsset;
 
-enum EnumWithCasesBeingAdded
+enum EnumWithCasesBeingChanged
 {
     case March;
     case April;

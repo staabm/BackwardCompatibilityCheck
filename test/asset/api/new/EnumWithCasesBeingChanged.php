@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace RoaveTestAsset;
 
-enum EnumWithCasesBeingAdded
+enum EnumWithCasesBeingChanged
 {
     // two new months below:
     case January;
@@ -15,7 +15,10 @@ enum EnumWithCasesBeingAdded
     case May;
     case June;
     case July;
-    case August;
+
+    // We're on holiday in August, not going to allow that month any more.
+    // case August;
+
     case September;
     case October;
     case November;

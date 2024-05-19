@@ -6,13 +6,13 @@ namespace RoaveTest\BackwardCompatibility\DetectChanges\BCBreak\EnumBased;
 
 use PHPUnit\Framework\TestCase;
 use Roave\BackwardCompatibility\Change;
-use Roave\BackwardCompatibility\DetectChanges\BCBreak\EnumBased\CaseAdded;
+use Roave\BackwardCompatibility\DetectChanges\BCBreak\EnumBased\CasesChanged;
 use Roave\BetterReflection\BetterReflection;
 use Roave\BetterReflection\Reflection\ReflectionClass;
 use Roave\BetterReflection\Reflector\DefaultReflector;
 use Roave\BetterReflection\SourceLocator\Type\SingleFileSourceLocator;
 
-/** @covers \Roave\BackwardCompatibility\DetectChanges\BCBreak\EnumBased\CaseAdded */
+/** @covers \Roave\BackwardCompatibility\DetectChanges\BCBreak\EnumBased\CasesChanged */
 final class EnumCaseAddedTest extends TestCase
 {
     /**
@@ -26,7 +26,7 @@ final class EnumCaseAddedTest extends TestCase
         array           $expectedMessages,
     ): void
     {
-        $changes = (new CaseAdded())($fromEnum, $toEnum);
+        $changes = (new CasesChanged())($fromEnum, $toEnum);
 
         self::assertSame(
             $expectedMessages,
@@ -45,18 +45,19 @@ final class EnumCaseAddedTest extends TestCase
         $locator = (new BetterReflection())->astLocator();
 
         return [
-            'RoaveTestAsset\\EnumWithCasesBeingAdded' => [
+            'RoaveTestAsset\\EnumWithCasesBeingChanged' => [
                 (new DefaultReflector(new SingleFileSourceLocator(
-                    __DIR__ . '/../../../../asset/api/old/EnumWithCasesBeingAdded.php',
+                    __DIR__ . '/../../../../asset/api/old/EnumWithCasesBeingChanged.php',
                     $locator,
-                )))->reflectClass('RoaveTestAsset\EnumWithCasesBeingAdded'),
+                )))->reflectClass('RoaveTestAsset\EnumWithCasesBeingChanged'),
                 (new DefaultReflector(new SingleFileSourceLocator(
-                    __DIR__ . '/../../../../asset/api/new/EnumWithCasesBeingAdded.php',
+                    __DIR__ . '/../../../../asset/api/new/EnumWithCasesBeingChanged.php',
                     $locator,
-                )))->reflectClass('RoaveTestAsset\EnumWithCasesBeingAdded'),
+                )))->reflectClass('RoaveTestAsset\EnumWithCasesBeingChanged'),
                 [
-                    '[BC] ADDED: Case RoaveTestAsset\EnumWithCasesBeingAdded::January was added',
-                    '[BC] ADDED: Case RoaveTestAsset\EnumWithCasesBeingAdded::February was added',
+                    '[BC] REMOVED: Case RoaveTestAsset\EnumWithCasesBeingChanged::August was removed',
+                    '[BC] ADDED: Case RoaveTestAsset\EnumWithCasesBeingChanged::January was added',
+                    '[BC] ADDED: Case RoaveTestAsset\EnumWithCasesBeingChanged::February was added',
                 ],
             ],
         ];

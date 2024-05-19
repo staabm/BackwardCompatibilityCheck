@@ -11,7 +11,7 @@ use Roave\BetterReflection\Reflection\ReflectionClass;
 use Roave\BetterReflection\Reflection\ReflectionEnum;
 use Roave\BetterReflection\Reflection\ReflectionEnumCase;
 
-class CaseAdded implements EnumBased
+class CasesChanged implements EnumBased
 {
     public function __invoke(ReflectionClass $fromEnum, ReflectionClass $toEnum): Changes
     {
@@ -40,15 +40,28 @@ class CaseAdded implements EnumBased
             }
         );
 
-        $changes = array_map(function (ReflectionEnumCase $case) use ($fromEnumName): Change {
+        $removedCases = array_filter(
+            $fromEnum->getCases(),
+            static fn(ReflectionEnumCase $case): bool => !$toEnum->hasCase($case->getName())
+        );
+
+        $caseRemovedChanges = array_values(array_map(function (ReflectionEnumCase $case) use ($fromEnumName): Change {
+            $caseName = $case->getName();
+
+            return Change::removed("Case {$fromEnumName}::{$caseName} was removed");
+        },
+            $removedCases
+        ));
+
+        $caseAddedChanges = array_values(array_map(function (ReflectionEnumCase $case) use ($fromEnumName): Change {
             $caseName = $case->getName();
 
             return Change::added("Case {$fromEnumName}::{$caseName} was added");
             },
             $addedCases
-        );
+        ));
 
-        return Changes::fromList(...$changes);
+        return Changes::fromList(...$caseRemovedChanges, ...$caseAddedChanges);
     }
 
     /**
