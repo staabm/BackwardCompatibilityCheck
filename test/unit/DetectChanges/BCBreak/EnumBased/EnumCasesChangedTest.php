@@ -11,12 +11,13 @@ use Roave\BetterReflection\BetterReflection;
 use Roave\BetterReflection\Reflection\ReflectionClass;
 use Roave\BetterReflection\Reflector\DefaultReflector;
 use Roave\BetterReflection\SourceLocator\Type\SingleFileSourceLocator;
+use stdClass;
 
 use function array_map;
 use function iterator_to_array;
 
 /** @covers \Roave\BackwardCompatibility\DetectChanges\BCBreak\EnumBased\CasesChanged */
-final class EnumCaseAddedTest extends TestCase
+final class EnumCasesChangedTest extends TestCase
 {
     /**
      * @param string[] $expectedMessages
@@ -36,6 +37,32 @@ final class EnumCaseAddedTest extends TestCase
                 return $change->__toString();
             }, iterator_to_array($changes)),
         );
+    }
+
+    public function testReturnsNoChangesIfOldEnumIsNotEnum(): void
+    {
+        // EnumCasesChanged should not be called when the old symbol is not an Enum. If it does it will
+        // just return an empty list.
+
+        $changes = (new CasesChanged())(
+            ReflectionClass::createFromName(stdClass::class),
+            ReflectionClass::createFromName(DummyEnum::class),
+        );
+
+        $this->assertSame(0, $changes->count());
+    }
+
+    public function testReturnsNoChangesIfNewEnumIsNotEnum(): void
+    {
+        // EnumCasesChanged should not be called when the old symbol is not an Enum. If it does it will
+        // just return an empty list.
+
+        $changes = (new CasesChanged())(
+            ReflectionClass::createFromName(DummyEnum::class),
+            ReflectionClass::createFromName(stdClass::class),
+        );
+
+        $this->assertSame(0, $changes->count());
     }
 
     /**

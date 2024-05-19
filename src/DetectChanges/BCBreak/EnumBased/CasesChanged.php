@@ -13,7 +13,6 @@ use Roave\BetterReflection\Reflection\ReflectionEnumCase;
 
 use function array_filter;
 use function array_map;
-use function array_values;
 
 class CasesChanged implements EnumBased
 {
