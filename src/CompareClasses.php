@@ -8,6 +8,7 @@ use Psl\Dict;
 use Psl\Regex;
 use Psl\Str;
 use Roave\BackwardCompatibility\DetectChanges\BCBreak\ClassBased\ClassBased;
+use Roave\BackwardCompatibility\DetectChanges\BCBreak\EnumBased\EnumBased;
 use Roave\BackwardCompatibility\DetectChanges\BCBreak\InterfaceBased\InterfaceBased;
 use Roave\BackwardCompatibility\DetectChanges\BCBreak\TraitBased\TraitBased;
 use Roave\BetterReflection\Reflection\ReflectionClass;
@@ -20,8 +21,7 @@ final class CompareClasses implements CompareApi
         private ClassBased $classBasedComparisons,
         private InterfaceBased $interfaceBasedComparisons,
         private TraitBased $traitBasedComparisons,
-        // $enumBasedComparisons temporarily removed to see how it affects infection results
-        //        private EnumBased|null $enumBasedComparisons = null, // optional argument for now to avoid BC break
+        private EnumBased|null $enumBasedComparisons = null, // optional argument for now to avoid BC break
     ) {
     }
 
@@ -91,11 +91,11 @@ final class CompareClasses implements CompareApi
             return;
         }
 
-//        if ($oldSymbol->isEnum() && $this->enumBasedComparisons) {
-//            yield from ($this->enumBasedComparisons)($oldSymbol, $newClass);
-//
-//            return;
-//        }
+        if ($oldSymbol->isEnum() && $this->enumBasedComparisons) {
+            yield from ($this->enumBasedComparisons)($oldSymbol, $newClass);
+
+            return;
+        }
 
         yield from ($this->classBasedComparisons)($oldSymbol, $newClass);
     }
