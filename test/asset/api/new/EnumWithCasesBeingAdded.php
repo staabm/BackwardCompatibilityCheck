@@ -19,5 +19,13 @@ enum EnumWithCasesBeingAdded
     case September;
     case October;
     case November;
-    Case December;
+    case December;
+
+    /**
+     * For testing now but for use only in a future major version. As it should not be statically referenced from
+     * outside this library, and the library will not pass a reference to it to the outside at runtime, adding it
+     * is not a BC break.
+     * @internal
+     */
+    case Sol;
 }

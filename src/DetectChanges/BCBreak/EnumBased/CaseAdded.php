@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Roave\BackwardCompatibility\DetectChanges\BCBreak\EnumBased;
 
+use Psl\Regex;
 use Roave\BackwardCompatibility\Change;
 use Roave\BackwardCompatibility\Changes;
 use Roave\BetterReflection\Reflection\ReflectionClass;
@@ -26,7 +27,17 @@ class CaseAdded implements EnumBased
 
         $addedCases = array_filter(
             $toEnum->getCases(),
-            static fn(ReflectionEnumCase $case): bool => (! $fromEnum->hasCase($case->getName()))
+            static function (ReflectionEnumCase $case) use ($fromEnum): bool {
+                if (self::isInternalDocComment($case->getDocComment())) {
+                    return false;
+                }
+
+                if ($fromEnum->hasCase($case->getName())) {
+                    return false;
+                }
+
+                return true;
+            }
         );
 
         $changes = array_map(function (ReflectionEnumCase $case) use ($fromEnumName): Change {
@@ -38,5 +49,15 @@ class CaseAdded implements EnumBased
         );
 
         return Changes::fromList(...$changes);
+    }
+
+    /**
+     * Copied from DetectChanges\BCBreak\ClassBased\ExcludeInternalClass - for now I'm not sure
+     * if there's a good place to put a shared function, and following the 3 strike then refactor rule.
+     */
+    private static function isInternalDocComment(string|null $comment): bool
+    {
+        return $comment !== null
+            && Regex\matches($comment, '/\s+@internal\s+/');
     }
 };
