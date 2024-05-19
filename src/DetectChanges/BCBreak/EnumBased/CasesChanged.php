@@ -42,7 +42,13 @@ class CasesChanged implements EnumBased
 
         $removedCases = array_filter(
             $fromEnum->getCases(),
-            static fn(ReflectionEnumCase $case): bool => !$toEnum->hasCase($case->getName())
+            static function (ReflectionEnumCase $case) use ($toEnum): bool {
+                if (self::isInternalDocComment($case->getDocComment())) {
+                    return false;
+                }
+
+                return !$toEnum->hasCase($case->getName());
+            }
         );
 
         $caseRemovedChanges = array_values(array_map(function (ReflectionEnumCase $case) use ($fromEnumName): Change {

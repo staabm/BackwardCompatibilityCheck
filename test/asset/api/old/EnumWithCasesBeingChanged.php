@@ -16,4 +16,9 @@ enum EnumWithCasesBeingChanged
     case October;
     case November;
     Case December;
+
+    /**
+     * @internal - may be removed without notice
+     */
+    case FakeMonth;
 }
