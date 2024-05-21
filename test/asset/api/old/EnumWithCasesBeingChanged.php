@@ -15,7 +15,7 @@ enum EnumWithCasesBeingChanged
     case September;
     case October;
     case November;
-    Case December;
+    Case december; // oops forget this is spelled with a capital D
 
     /**
      * @internal - may be removed without notice

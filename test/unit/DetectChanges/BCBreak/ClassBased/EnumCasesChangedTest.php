@@ -84,8 +84,10 @@ final class EnumCasesChangedTest extends TestCase
                 )))->reflectClass('RoaveTestAsset\EnumWithCasesBeingChanged'),
                 [
                     '[BC] REMOVED: Case RoaveTestAsset\EnumWithCasesBeingChanged::August was removed',
+                    '[BC] REMOVED: Case RoaveTestAsset\EnumWithCasesBeingChanged::december was removed',
                     '[BC] ADDED: Case RoaveTestAsset\EnumWithCasesBeingChanged::January was added',
                     '[BC] ADDED: Case RoaveTestAsset\EnumWithCasesBeingChanged::February was added',
+                    '[BC] ADDED: Case RoaveTestAsset\EnumWithCasesBeingChanged::December was added',
                 ],
             ],
         ];
