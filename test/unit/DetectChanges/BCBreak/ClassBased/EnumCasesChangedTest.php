@@ -49,10 +49,8 @@ final class EnumCasesChangedTest extends TestCase
         );
 
         $this->assertEquals(
-            [
-                Change::changed("class stdClass became enum")
-            ],
-            \iterator_to_array($changes)
+            [Change::changed('class stdClass became enum')],
+            iterator_to_array($changes),
         );
     }
 
@@ -67,10 +65,8 @@ final class EnumCasesChangedTest extends TestCase
         );
 
         $this->assertEquals(
-            [
-                Change::changed("enum RoaveTest\BackwardCompatibility\DetectChanges\BCBreak\ClassBased\DummyEnum became class")
-            ],
-            \iterator_to_array($changes)
+            [Change::changed('enum RoaveTest\BackwardCompatibility\DetectChanges\BCBreak\ClassBased\DummyEnum became class')],
+            iterator_to_array($changes),
         );
     }
 

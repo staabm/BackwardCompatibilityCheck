@@ -19,19 +19,19 @@ class EnumCasesChanged implements ClassBased
     public function __invoke(ReflectionClass $fromClass, ReflectionClass $toClass): Changes
     {
         $fromEnumName = $fromClass->getName();
-        $fromKind = $this->kindOf($fromClass);
-        $toKind = $this->kindOf($toClass);
+        $fromKind     = $this->kindOf($fromClass);
+        $toKind       = $this->kindOf($toClass);
 
         if (! $fromClass instanceof ReflectionEnum && ! $toClass instanceof ReflectionEnum) {
             return Changes::empty();
         }
 
         if (! $fromClass instanceof ReflectionEnum && $toClass instanceof ReflectionEnum) {
-            return Changes::fromList(Change::changed("$fromKind " . $fromEnumName . " became enum"));
+            return Changes::fromList(Change::changed($fromKind . ' ' . $fromEnumName . ' became enum'));
         }
 
-        if ($fromClass instanceof ReflectionEnum && ! $toClass instanceof ReflectionEnum) {
-            return Changes::fromList(Change::changed("enum " . $fromEnumName . " became " . $toKind));
+        if (! $toClass instanceof ReflectionEnum) {
+            return Changes::fromList(Change::changed('enum ' . $fromEnumName . ' became ' . $toKind));
         }
 
         $addedCases = array_filter(
@@ -64,12 +64,13 @@ class EnumCasesChanged implements ClassBased
                     return false;
                 }
 
-                if (! $fromClass->hasCase($case->getName())) {
+                $fromClassCase = $fromClass->getCase($case->getName());
+                if (! $fromClassCase) {
                     return false;
-                };
+                }
 
-                return ! self::isInternalDocComment($fromClass->getCase($case->getName())->getDocComment());
-            }
+                return ! self::isInternalDocComment($fromClassCase->getDocComment());
+            },
         );
 
         $caseRemovedChanges = array_map(
