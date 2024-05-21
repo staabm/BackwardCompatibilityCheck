@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace RoaveTest\BackwardCompatibility\DetectChanges\BCBreak\EnumBased;
+namespace RoaveTest\BackwardCompatibility\DetectChanges\BCBreak\ClassBased;
 
 use PHPUnit\Framework\TestCase;
 use Roave\BackwardCompatibility\Change;
-use Roave\BackwardCompatibility\DetectChanges\BCBreak\EnumBased\CasesChanged;
+use Roave\BackwardCompatibility\DetectChanges\BCBreak\ClassBased\CasesChanged;
 use Roave\BetterReflection\BetterReflection;
 use Roave\BetterReflection\Reflection\ReflectionClass;
 use Roave\BetterReflection\Reflector\DefaultReflector;

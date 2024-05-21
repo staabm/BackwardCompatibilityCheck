@@ -14,7 +14,6 @@ use Roave\BackwardCompatibility\Command;
 use Roave\BackwardCompatibility\CompareClasses;
 use Roave\BackwardCompatibility\DetectChanges\BCBreak\ClassBased;
 use Roave\BackwardCompatibility\DetectChanges\BCBreak\ClassConstantBased;
-use Roave\BackwardCompatibility\DetectChanges\BCBreak\EnumBased;
 use Roave\BackwardCompatibility\DetectChanges\BCBreak\FunctionBased;
 use Roave\BackwardCompatibility\DetectChanges\BCBreak\InterfaceBased;
 use Roave\BackwardCompatibility\DetectChanges\BCBreak\MethodBased;
@@ -97,6 +96,7 @@ use function file_exists;
                     new ClassBased\SkipClassBasedErrors(new ClassBased\MethodRemoved()),
                     new ClassBased\SkipClassBasedErrors(new ClassBased\AncestorRemoved()),
                     new ClassBased\SkipClassBasedErrors(new ClassBased\ClassBecameInternal()),
+                    new ClassBased\SkipClassBasedErrors(new ClassBased\CasesChanged()),
                     new ClassBased\SkipClassBasedErrors(new ClassBased\OpenClassChanged(
                         new ClassBased\MultipleChecksOnAClass(
                             new ClassBased\SkipClassBasedErrors(new ClassBased\ConstantChanged(
@@ -313,7 +313,6 @@ use function file_exists;
                     ),
                 )),
             ))),
-            new EnumBased\CasesChanged(),
         ),
     );
 

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Roave\BackwardCompatibility\DetectChanges\BCBreak\EnumBased;
+namespace Roave\BackwardCompatibility\DetectChanges\BCBreak\ClassBased;
 
 use Psl\Regex;
 use Roave\BackwardCompatibility\Change;
@@ -14,11 +14,11 @@ use Roave\BetterReflection\Reflection\ReflectionEnumCase;
 use function array_filter;
 use function array_map;
 
-class CasesChanged implements EnumBased
+class CasesChanged implements ClassBased
 {
-    public function __invoke(ReflectionClass $fromEnum, ReflectionClass $toEnum): Changes
+    public function __invoke(ReflectionClass $fromClass, ReflectionClass $toEnum): Changes
     {
-        if (! $fromEnum instanceof ReflectionEnum) {
+        if (! $fromClass instanceof ReflectionEnum) {
             return Changes::empty();
         }
 
@@ -26,22 +26,22 @@ class CasesChanged implements EnumBased
             return Changes::empty();
         }
 
-        $fromEnumName = $fromEnum->getName();
+        $fromEnumName = $fromClass->getName();
 
         $addedCases = array_filter(
             $toEnum->getCases(),
-            static function (ReflectionEnumCase $case) use ($fromEnum): bool {
+            static function (ReflectionEnumCase $case) use ($fromClass): bool {
                 if (self::isInternalDocComment($case->getDocComment())) {
                     return false;
                 }
 
-                return ! $fromEnum->hasCase($case->getName());
+                return ! $fromClass->hasCase($case->getName());
             },
         );
 
 
         $removedCases = array_filter(
-            $fromEnum->getCases(),
+            $fromClass->getCases(),
             static function (ReflectionEnumCase $case) use ($toEnum): bool {
                 if (self::isInternalDocComment($case->getDocComment())) {
                     return false;
