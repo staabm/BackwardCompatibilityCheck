@@ -38,7 +38,7 @@ final class EnumCasesChangedTest extends TestCase
         );
     }
 
-    public function testReturnsNoChangesIfOldEnumIsNotEnum(): void
+    public function testReturnsClassBecameEnumError(): void
     {
         // EnumCasesChanged should not be called when the old symbol is not an Enum. If it does it will
         // just return an empty list.
@@ -48,10 +48,15 @@ final class EnumCasesChangedTest extends TestCase
             ReflectionClass::createFromName(DummyEnum::class),
         );
 
-        $this->assertSame(0, $changes->count());
+        $this->assertEquals(
+            [
+                Change::changed("class stdClass became enum")
+            ],
+            \iterator_to_array($changes)
+        );
     }
 
-    public function testReturnsNoChangesIfNewEnumIsNotEnum(): void
+    public function testReturnsEnumBecameClassError(): void
     {
         // EnumCasesChanged should not be called when the old symbol is not an Enum. If it does it will
         // just return an empty list.
@@ -61,7 +66,12 @@ final class EnumCasesChangedTest extends TestCase
             ReflectionClass::createFromName(stdClass::class),
         );
 
-        $this->assertSame(0, $changes->count());
+        $this->assertEquals(
+            [
+                Change::changed("enum RoaveTest\BackwardCompatibility\DetectChanges\BCBreak\ClassBased\DummyEnum became class")
+            ],
+            \iterator_to_array($changes)
+        );
     }
 
     /**
