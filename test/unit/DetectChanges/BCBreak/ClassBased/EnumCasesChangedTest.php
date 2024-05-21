@@ -6,7 +6,7 @@ namespace RoaveTest\BackwardCompatibility\DetectChanges\BCBreak\ClassBased;
 
 use PHPUnit\Framework\TestCase;
 use Roave\BackwardCompatibility\Change;
-use Roave\BackwardCompatibility\DetectChanges\BCBreak\ClassBased\CasesChanged;
+use Roave\BackwardCompatibility\DetectChanges\BCBreak\ClassBased\EnumCasesChanged;
 use Roave\BetterReflection\BetterReflection;
 use Roave\BetterReflection\Reflection\ReflectionClass;
 use Roave\BetterReflection\Reflector\DefaultReflector;
@@ -28,7 +28,7 @@ final class EnumCasesChangedTest extends TestCase
         ReflectionClass $toEnum,
         array $expectedMessages,
     ): void {
-        $changes = (new CasesChanged())($fromEnum, $toEnum);
+        $changes = (new EnumCasesChanged())($fromEnum, $toEnum);
 
         self::assertSame(
             $expectedMessages,
@@ -43,7 +43,7 @@ final class EnumCasesChangedTest extends TestCase
         // EnumCasesChanged should not be called when the old symbol is not an Enum. If it does it will
         // just return an empty list.
 
-        $changes = (new CasesChanged())(
+        $changes = (new EnumCasesChanged())(
             ReflectionClass::createFromName(stdClass::class),
             ReflectionClass::createFromName(DummyEnum::class),
         );
@@ -61,7 +61,7 @@ final class EnumCasesChangedTest extends TestCase
         // EnumCasesChanged should not be called when the old symbol is not an Enum. If it does it will
         // just return an empty list.
 
-        $changes = (new CasesChanged())(
+        $changes = (new EnumCasesChanged())(
             ReflectionClass::createFromName(DummyEnum::class),
             ReflectionClass::createFromName(stdClass::class),
         );
