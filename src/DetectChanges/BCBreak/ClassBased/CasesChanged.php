@@ -51,6 +51,21 @@ class CasesChanged implements ClassBased
             },
         );
 
+        $internalisedCases = array_filter(
+            $toEnum->getCases(),
+            static function (ReflectionEnumCase $case) use ($fromClass) {
+                if (! self::isInternalDocComment($case->getDocComment())) {
+                    return false;
+                }
+
+                if (! $fromClass->hasCase($case->getName())) {
+                    return false;
+                };
+
+                return ! self::isInternalDocComment($fromClass->getCase($case->getName())->getDocComment());
+            }
+        );
+
         $caseRemovedChanges = array_map(
             static function (ReflectionEnumCase $case) use ($fromEnumName): Change {
                 $caseName = $case->getName();
@@ -69,7 +84,16 @@ class CasesChanged implements ClassBased
             $addedCases,
         );
 
-        return Changes::fromList(...$caseRemovedChanges, ...$caseAddedChanges);
+        $caseBecameInternalChanges = array_map(
+            static function (ReflectionEnumCase $case) use ($fromEnumName): Change {
+                $caseName = $case->getName();
+
+                return Change::changed('Case ' . $fromEnumName . '::' . $caseName . ' was marked "@internal"');
+            },
+            $internalisedCases,
+        );
+
+        return Changes::fromList(...$caseRemovedChanges, ...$caseAddedChanges, ...$caseBecameInternalChanges);
     }
 
     /**

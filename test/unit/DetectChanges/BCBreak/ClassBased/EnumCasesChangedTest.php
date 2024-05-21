@@ -88,6 +88,7 @@ final class EnumCasesChangedTest extends TestCase
                     '[BC] ADDED: Case RoaveTestAsset\EnumWithCasesBeingChanged::January was added',
                     '[BC] ADDED: Case RoaveTestAsset\EnumWithCasesBeingChanged::February was added',
                     '[BC] ADDED: Case RoaveTestAsset\EnumWithCasesBeingChanged::December was added',
+                    '[BC] CHANGED: Case RoaveTestAsset\EnumWithCasesBeingChanged::March was marked "@internal"',
                 ],
             ],
         ];

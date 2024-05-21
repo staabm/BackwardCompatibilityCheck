@@ -10,7 +10,9 @@ enum EnumWithCasesBeingChanged
     case January;
     case February;
 
+    /** @internal  - tired from the two new Months, reserving March for private use from now on.*/
     case March;
+
     case April;
     case May;
     case June;
