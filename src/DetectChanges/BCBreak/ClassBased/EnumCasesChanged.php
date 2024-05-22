@@ -14,7 +14,7 @@ use Roave\BetterReflection\Reflection\ReflectionEnumCase;
 use function array_filter;
 use function array_map;
 
-class EnumCasesChanged implements ClassBased
+final class EnumCasesChanged implements ClassBased
 {
     public function __invoke(ReflectionClass $fromClass, ReflectionClass $toClass): Changes
     {
