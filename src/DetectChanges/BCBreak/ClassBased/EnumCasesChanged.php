@@ -132,10 +132,6 @@ final class EnumCasesChanged implements ClassBased
         );
     }
 
-    /**
-     * Copied from DetectChanges\BCBreak\ClassBased\ExcludeInternalClass - for now I'm not sure
-     * if there's a good place to put a shared function, and following the 3 strike then refactor rule.
-     */
     private static function isInternalDocComment(string|null $comment): bool
     {
         return $comment !== null
