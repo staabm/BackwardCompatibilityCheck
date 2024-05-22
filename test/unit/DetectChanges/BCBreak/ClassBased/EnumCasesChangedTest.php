@@ -40,9 +40,6 @@ final class EnumCasesChangedTest extends TestCase
 
     public function testReturnsClassBecameEnumError(): void
     {
-        // EnumCasesChanged should not be called when the old symbol is not an Enum. If it does it will
-        // just return an empty list.
-
         $changes = (new EnumCasesChanged())(
             ReflectionClass::createFromName(stdClass::class),
             ReflectionClass::createFromName(DummyEnum::class),
@@ -56,9 +53,6 @@ final class EnumCasesChangedTest extends TestCase
 
     public function testReturnsEnumBecameClassError(): void
     {
-        // EnumCasesChanged should not be called when the old symbol is not an Enum. If it does it will
-        // just return an empty list.
-
         $changes = (new EnumCasesChanged())(
             ReflectionClass::createFromName(DummyEnum::class),
             ReflectionClass::createFromName(stdClass::class),
