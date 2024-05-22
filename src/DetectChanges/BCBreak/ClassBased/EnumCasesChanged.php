@@ -26,7 +26,7 @@ final class EnumCasesChanged implements ClassBased
             return Changes::empty();
         }
 
-        if (! $fromClass instanceof ReflectionEnum && $toClass instanceof ReflectionEnum) {
+        if (! $fromClass instanceof ReflectionEnum) {
             return Changes::fromList(Change::changed($fromKind . ' ' . $fromEnumName . ' became enum'));
         }
 
