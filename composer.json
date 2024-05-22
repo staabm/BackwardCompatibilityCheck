@@ -3,13 +3,13 @@
     "description": "Tool to compare two revisions of a public API to check for BC breaks",
     "require": {
         "php": "~8.2.0 || ~8.3.0",
-        "azjezz/psl": "^2.3.1",
-        "composer/composer": "^2.7.0",
-        "nikic/php-parser": "^4.15.3",
-        "nikolaposa/version": "^4.1.0",
-        "ocramius/package-versions": "^2.7.0",
-        "roave/better-reflection": "^6.5.0",
-        "symfony/console": "^7.0"
+        "azjezz/psl": "^2.9.1",
+        "composer/composer": "^2.7.6",
+        "nikic/php-parser": "^4.19.1",
+        "nikolaposa/version": "^4.2.0",
+        "ocramius/package-versions": "^2.8.0",
+        "roave/better-reflection": "^6.36.0",
+        "symfony/console": "^7.0.7"
     },
     "license": "MIT",
     "authors": [
@@ -24,13 +24,13 @@
     ],
     "require-dev": {
         "doctrine/coding-standard": "^12.0.0",
-        "php-standard-library/psalm-plugin": "^2.2.1",
-        "phpunit/phpunit": "^9.5.27",
-        "psalm/plugin-phpunit": "^0.18.4",
-        "roave/infection-static-analysis-plugin": "^1.27.0",
+        "php-standard-library/psalm-plugin": "^2.3.0",
+        "phpunit/phpunit": "^9.6.19",
+        "psalm/plugin-phpunit": "^0.19.0",
+        "roave/infection-static-analysis-plugin": "^1.35.0",
         "roave/security-advisories": "dev-master",
-        "squizlabs/php_codesniffer": "^3.7.1",
-        "vimeo/psalm": "^5.16"
+        "squizlabs/php_codesniffer": "^3.10.0",
+        "vimeo/psalm": "^5.24.0"
     },
     "conflict": {
         "revolt/event-loop": "<0.2.5",
