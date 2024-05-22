@@ -153,6 +153,7 @@ PHP,
         $this->classBasedComparatorWillNotBeCalled();
         $this->interfaceBasedComparatorWillNotBeCalled();
         $this->traitBasedComparatorWillNotBeCalled();
+
         Assertion::assertChangesEqual(
             Changes::empty(),
             ($this->compareClasses)(
