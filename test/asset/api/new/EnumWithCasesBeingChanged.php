@@ -33,4 +33,10 @@ enum EnumWithCasesBeingChanged
      * @internal
      */
     case Sol;
+
+    /**
+     * Previously internal, now public. This is a BC break as we previously committed to never return an instance
+     * of this case and we no-longer make this commitment.
+     */
+    case UnknownMonth;
 }

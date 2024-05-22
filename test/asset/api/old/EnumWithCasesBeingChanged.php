@@ -21,4 +21,9 @@ enum EnumWithCasesBeingChanged
      * @internal - may be removed without notice
      */
     case FakeMonth;
+
+    /**
+     * @internal - may be introduced in future
+     */
+    case UnknownMonth;
 }

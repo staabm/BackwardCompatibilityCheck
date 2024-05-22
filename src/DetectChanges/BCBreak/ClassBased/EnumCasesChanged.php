@@ -45,7 +45,6 @@ class EnumCasesChanged implements ClassBased
             },
         );
 
-
         $removedCases = array_filter(
             $fromClass->getCases(),
             static function (ReflectionEnumCase $case) use ($toClass): bool {
@@ -70,6 +69,22 @@ class EnumCasesChanged implements ClassBased
                 }
 
                 return ! self::isInternalDocComment($fromClassCase->getDocComment());
+            },
+        );
+
+        $nowNotInternalCases = array_filter(
+            $toClass->getCases(),
+            static function (ReflectionEnumCase $case) use ($fromClass) {
+                if (self::isInternalDocComment($case->getDocComment())) {
+                    return false;
+                }
+
+                $fromClassCase = $fromClass->getCase($case->getName());
+                if (! $fromClassCase) {
+                    return false;
+                }
+
+                return self::isInternalDocComment($fromClassCase->getDocComment());
             },
         );
 
@@ -100,7 +115,21 @@ class EnumCasesChanged implements ClassBased
             $internalisedCases,
         );
 
-        return Changes::fromList(...$caseRemovedChanges, ...$caseAddedChanges, ...$caseBecameInternalChanges);
+        $caseBecameNotInternalChanges = array_map(
+            static function (ReflectionEnumCase $case) use ($fromEnumName): Change {
+                $caseName = $case->getName();
+
+                return Change::changed('Case ' . $fromEnumName . '::' . $caseName . ' had "@internal" removed');
+            },
+            $nowNotInternalCases,
+        );
+
+        return Changes::fromList(
+            ...$caseRemovedChanges,
+            ...$caseAddedChanges,
+            ...$caseBecameInternalChanges,
+            ...$caseBecameNotInternalChanges,
+        );
     }
 
     /**
