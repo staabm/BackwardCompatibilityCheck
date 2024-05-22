@@ -96,6 +96,7 @@ use function file_exists;
                     new ClassBased\SkipClassBasedErrors(new ClassBased\MethodRemoved()),
                     new ClassBased\SkipClassBasedErrors(new ClassBased\AncestorRemoved()),
                     new ClassBased\SkipClassBasedErrors(new ClassBased\ClassBecameInternal()),
+                    new ClassBased\SkipClassBasedErrors(new ClassBased\EnumCasesChanged()),
                     new ClassBased\SkipClassBasedErrors(new ClassBased\OpenClassChanged(
                         new ClassBased\MultipleChecksOnAClass(
                             new ClassBased\SkipClassBasedErrors(new ClassBased\ConstantChanged(

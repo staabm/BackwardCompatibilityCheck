@@ -126,8 +126,9 @@ final class GitCheckoutRevisionToTemporaryPathTest extends TestCase
         $git       = new GitCheckoutRevisionToTemporaryPath();
         $revision  = Revision::fromSha1(self::TEST_REVISION_TO_CHECKOUT);
         $directory = $git->generateTemporaryPathFor($revision);
+        $tmpDir    = Env\temp_dir();
 
-        self::assertStringContainsString('/tmp/api-compare-', $directory);
+        self::assertStringContainsString($tmpDir . '/api-compare-', $directory);
     }
 
     private function sourceRepository(): CheckedOutRepository
