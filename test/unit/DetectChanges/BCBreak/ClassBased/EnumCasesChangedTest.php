@@ -16,6 +16,7 @@ use stdClass;
 use function array_map;
 use function iterator_to_array;
 
+/** @covers EnumCasesChanged */
 final class EnumCasesChangedTest extends TestCase
 {
     /**
