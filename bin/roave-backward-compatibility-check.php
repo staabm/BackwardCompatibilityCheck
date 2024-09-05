@@ -145,6 +145,7 @@ use function file_exists;
                                             new MethodBased\SkipMethodBasedErrors(new MethodBased\MethodConcretenessChanged()),
                                             new MethodBased\SkipMethodBasedErrors(new MethodBased\MethodScopeChanged()),
                                             new MethodBased\SkipMethodBasedErrors(new MethodBased\MethodVisibilityReduced()),
+                                            new MethodBased\SkipMethodBasedErrors(new MethodBased\MethodParameterAdded()),
                                             new MethodBased\SkipMethodBasedErrors(new MethodBased\MethodFunctionDefinitionChanged(
                                                 new FunctionBased\MultipleChecksOnAFunction(
                                                     new FunctionBased\SkipFunctionBasedErrors(new FunctionBased\FunctionBecameInternal()),
@@ -167,6 +168,7 @@ use function file_exists;
                                             new MethodBased\SkipMethodBasedErrors(new MethodBased\MethodConcretenessChanged()),
                                             new MethodBased\SkipMethodBasedErrors(new MethodBased\MethodScopeChanged()),
                                             new MethodBased\SkipMethodBasedErrors(new MethodBased\MethodVisibilityReduced()),
+                                            new MethodBased\SkipMethodBasedErrors(new MethodBased\MethodParameterAdded()),
                                             new MethodBased\SkipMethodBasedErrors(new MethodBased\MethodFunctionDefinitionChanged(
                                                 new FunctionBased\MultipleChecksOnAFunction(
                                                     new FunctionBased\SkipFunctionBasedErrors(new FunctionBased\FunctionBecameInternal()),
@@ -214,6 +216,7 @@ use function file_exists;
                                         new MethodBased\SkipMethodBasedErrors(new MethodBased\MethodBecameFinal()),
                                         new MethodBased\SkipMethodBasedErrors(new MethodBased\MethodConcretenessChanged()),
                                         new MethodBased\SkipMethodBasedErrors(new MethodBased\MethodScopeChanged()),
+                                        new MethodBased\SkipMethodBasedErrors(new MethodBased\MethodParameterAdded()),
                                         new MethodBased\SkipMethodBasedErrors(new MethodBased\MethodVisibilityReduced()),
                                         new MethodBased\SkipMethodBasedErrors(new MethodBased\MethodFunctionDefinitionChanged(
                                             new FunctionBased\MultipleChecksOnAFunction(
@@ -249,6 +252,7 @@ use function file_exists;
                         new ClassBased\SkipClassBasedErrors(new ClassBased\MethodChanged(
                             new MethodBased\MultipleChecksOnAMethod(
                                 new MethodBased\SkipMethodBasedErrors(new MethodBased\MethodScopeChanged()),
+                                new MethodBased\SkipMethodBasedErrors(new MethodBased\MethodParameterAdded()),
                                 new MethodBased\SkipMethodBasedErrors(new MethodBased\MethodFunctionDefinitionChanged(
                                     new FunctionBased\MultipleChecksOnAFunction(
                                         new FunctionBased\SkipFunctionBasedErrors(new FunctionBased\FunctionBecameInternal()),
@@ -293,6 +297,7 @@ use function file_exists;
                                     new MethodBased\SkipMethodBasedErrors(new MethodBased\MethodConcretenessChanged()),
                                     new MethodBased\SkipMethodBasedErrors(new MethodBased\MethodScopeChanged()),
                                     new MethodBased\SkipMethodBasedErrors(new MethodBased\MethodVisibilityReduced()),
+                                    new MethodBased\SkipMethodBasedErrors(new MethodBased\MethodParameterAdded()),
                                     new MethodBased\SkipMethodBasedErrors(new MethodBased\MethodFunctionDefinitionChanged(
                                         new FunctionBased\MultipleChecksOnAFunction(
                                             new FunctionBased\SkipFunctionBasedErrors(new FunctionBased\FunctionBecameInternal()),
