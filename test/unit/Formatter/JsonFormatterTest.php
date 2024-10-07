@@ -13,10 +13,13 @@ use Roave\BackwardCompatibility\Change;
 use Roave\BackwardCompatibility\Changes;
 use Roave\BackwardCompatibility\Formatter\JsonFormatter;
 use Roave\BackwardCompatibility\Git\CheckedOutRepository;
+use stdClass;
 use Symfony\Component\Console\Output\BufferedOutput;
 
 use function dirname;
 use function json_decode;
+
+use const JSON_THROW_ON_ERROR;
 
 /** @covers \Roave\BackwardCompatibility\Formatter\JsonFormatter */
 final class JsonFormatterTest extends TestCase
@@ -76,7 +79,9 @@ final class JsonFormatterTest extends TestCase
         self::assertIsArray($data);
         self::assertEquals($expected, $data);
 
-        JsonAssert::assertJsonMatchesSchema($json, dirname(__DIR__, 3) . '/Resources/errors.schema.json');
+        $content = json_decode($json, flags: JSON_THROW_ON_ERROR);
+        self::assertInstanceOf(stdClass::class, $content);
+        JsonAssert::assertJsonMatchesSchema($content, dirname(__DIR__, 3) . '/Resources/errors.schema.json');
 
         self::assertJsonStringEqualsJsonString(
             <<<'OUTPUT'
