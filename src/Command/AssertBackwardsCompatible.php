@@ -13,6 +13,7 @@ use Roave\BackwardCompatibility\Changes;
 use Roave\BackwardCompatibility\CompareApi;
 use Roave\BackwardCompatibility\Factory\ComposerInstallationReflectorFactory;
 use Roave\BackwardCompatibility\Formatter\GithubActionsFormatter;
+use Roave\BackwardCompatibility\Formatter\JsonFormatter;
 use Roave\BackwardCompatibility\Formatter\JunitFormatter;
 use Roave\BackwardCompatibility\Formatter\MarkdownPipedToSymfonyConsoleFormatter;
 use Roave\BackwardCompatibility\Formatter\SymfonyConsoleTextFormatter;
@@ -154,6 +155,7 @@ USAGE,
                 'console'        => new SymfonyConsoleTextFormatter($stdErr),
                 'markdown'       => new MarkdownPipedToSymfonyConsoleFormatter($output),
                 'github-actions' => new GithubActionsFormatter($output, $toPath),
+                'json'           => new JsonFormatter($output, $toPath),
                 'junit'          => new JunitFormatter($output, $toPath),
             ];
 
@@ -162,6 +164,7 @@ USAGE,
                     Type\literal_scalar('console'),
                     Type\literal_scalar('markdown'),
                     Type\literal_scalar('github-actions'),
+                    Type\literal_scalar('json'),
                     Type\literal_scalar('junit'),
                 ))->coerce((array) $input->getOption('format')) as $format
             ) {

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4a371cbf24780e6e56b0661c943b713d",
+    "content-hash": "0b16dcd9a320baa3a377def78519d4f5",
     "packages": [
         {
             "name": "azjezz/psl",
@@ -3217,6 +3217,66 @@
             "time": "2022-12-30T00:23:10+00:00"
         },
         {
+            "name": "estahn/phpunit-json-assertions",
+            "version": "v4.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/estahn/phpunit-json-assertions.git",
+                "reference": "c1e794ab00f4a104e505e38aaf3c276028a03110"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/estahn/phpunit-json-assertions/zipball/c1e794ab00f4a104e505e38aaf3c276028a03110",
+                "reference": "c1e794ab00f4a104e505e38aaf3c276028a03110",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "justinrainbow/json-schema": "^5.0",
+                "mtdowling/jmespath.php": "^2.3",
+                "php": "^7.4|^8.0"
+            },
+            "require-dev": {
+                "codacy/coverage": "dev-master",
+                "phpunit/phpunit": "^9",
+                "symfony/http-foundation": "^2.8|^3.0|^5.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "EnricoStahn\\JsonAssert\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Enrico Stahn",
+                    "email": "enrico.stahn@gmail.com"
+                }
+            ],
+            "description": "JSON assertions for PHPUnit (including JSON Schema)",
+            "homepage": "https://github.com/estahn/phpunit-json-assertions",
+            "keywords": [
+                "json",
+                "phpunit",
+                "schema"
+            ],
+            "support": {
+                "issues": "https://github.com/estahn/phpunit-json-assertions/issues",
+                "source": "https://github.com/estahn/phpunit-json-assertions/tree/v4.0.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/estahn",
+                    "type": "github"
+                }
+            ],
+            "time": "2021-06-22T07:01:57+00:00"
+        },
+        {
             "name": "felixfbecker/advanced-json-rpc",
             "version": "v3.2.1",
             "source": {
@@ -3686,6 +3746,72 @@
                 }
             ],
             "time": "2024-02-20T00:08:52+00:00"
+        },
+        {
+            "name": "mtdowling/jmespath.php",
+            "version": "2.8.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jmespath/jmespath.php.git",
+                "reference": "a2a865e05d5f420b50cc2f85bb78d565db12a6bc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jmespath/jmespath.php/zipball/a2a865e05d5f420b50cc2f85bb78d565db12a6bc",
+                "reference": "a2a865e05d5f420b50cc2f85bb78d565db12a6bc",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.2.5 || ^8.0",
+                "symfony/polyfill-mbstring": "^1.17"
+            },
+            "require-dev": {
+                "composer/xdebug-handler": "^3.0.3",
+                "phpunit/phpunit": "^8.5.33"
+            },
+            "bin": [
+                "bin/jp.php"
+            ],
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.8-dev"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/JmesPath.php"
+                ],
+                "psr-4": {
+                    "JmesPath\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Graham Campbell",
+                    "email": "hello@gjcampbell.co.uk",
+                    "homepage": "https://github.com/GrahamCampbell"
+                },
+                {
+                    "name": "Michael Dowling",
+                    "email": "mtdowling@gmail.com",
+                    "homepage": "https://github.com/mtdowling"
+                }
+            ],
+            "description": "Declaratively specify how to extract elements from a JSON document",
+            "keywords": [
+                "json",
+                "jsonpath"
+            ],
+            "support": {
+                "issues": "https://github.com/jmespath/jmespath.php/issues",
+                "source": "https://github.com/jmespath/jmespath.php/tree/2.8.0"
+            },
+            "time": "2024-09-04T18:46:31+00:00"
         },
         {
             "name": "myclabs/deep-copy",
@@ -7307,7 +7433,7 @@
     "platform": {
         "php": "~8.2.0 || ~8.3.0"
     },
-    "platform-dev": {},
+    "platform-dev": [],
     "platform-overrides": {
         "php": "8.2.99"
     },
