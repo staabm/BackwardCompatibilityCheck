@@ -3,7 +3,7 @@
     "description": "Tool to compare two revisions of a public API to check for BC breaks",
     "require": {
         "php": "~8.2.0 || ~8.3.0",
-        "azjezz/psl": "^2.9.1",
+        "azjezz/psl": "^3.0.2",
         "composer/composer": "^2.7.6",
         "nikic/php-parser": "^4.19.1",
         "nikolaposa/version": "^4.2.0",

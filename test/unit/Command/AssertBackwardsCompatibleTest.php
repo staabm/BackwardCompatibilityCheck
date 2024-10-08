@@ -126,8 +126,8 @@ final class AssertBackwardsCompatibleTest extends TestCase
 
     public function testExecuteWhenRevisionsAreProvidedAsOptions(): void
     {
-        $fromSha = Hash\Context::forAlgorithm(Hash\Algorithm::SHA1)->update('fromRevision')->finalize();
-        $toSha   = Hash\Context::forAlgorithm(Hash\Algorithm::SHA1)->update('toRevision')->finalize();
+        $fromSha = Hash\Context::forAlgorithm(Hash\Algorithm::Sha1)->update('fromRevision')->finalize();
+        $toSha   = Hash\Context::forAlgorithm(Hash\Algorithm::Sha1)->update('toRevision')->finalize();
 
         $this->input->method('getOption')->willReturnMap([
             ['from', $fromSha],
@@ -191,8 +191,8 @@ final class AssertBackwardsCompatibleTest extends TestCase
 
     public function testExecuteWhenDevelopmentDependenciesAreRequested(): void
     {
-        $fromSha = Hash\Context::forAlgorithm(Hash\Algorithm::SHA1)->update('fromRevision')->finalize();
-        $toSha   = Hash\Context::forAlgorithm(Hash\Algorithm::SHA1)->update('toRevision')->finalize();
+        $fromSha = Hash\Context::forAlgorithm(Hash\Algorithm::Sha1)->update('fromRevision')->finalize();
+        $toSha   = Hash\Context::forAlgorithm(Hash\Algorithm::Sha1)->update('toRevision')->finalize();
 
         $this->input->method('getOption')->willReturnMap([
             ['from', $fromSha],
@@ -256,8 +256,8 @@ final class AssertBackwardsCompatibleTest extends TestCase
 
     public function testExecuteReturnsNonZeroExitCodeWhenChangesAreDetected(): void
     {
-        $fromSha = Hash\Context::forAlgorithm(Hash\Algorithm::SHA1)->update('fromRevision')->finalize();
-        $toSha   = Hash\Context::forAlgorithm(Hash\Algorithm::SHA1)->update('toRevision')->finalize();
+        $fromSha = Hash\Context::forAlgorithm(Hash\Algorithm::Sha1)->update('fromRevision')->finalize();
+        $toSha   = Hash\Context::forAlgorithm(Hash\Algorithm::Sha1)->update('toRevision')->finalize();
 
         $this->input->method('getOption')->willReturnMap([
             ['from', $fromSha],
@@ -334,8 +334,8 @@ final class AssertBackwardsCompatibleTest extends TestCase
 
     public function testProvidingMarkdownOptionWritesMarkdownOutput(): void
     {
-        $fromSha = Hash\Context::forAlgorithm(Hash\Algorithm::SHA1)->update('fromRevision')->finalize();
-        $toSha   = Hash\Context::forAlgorithm(Hash\Algorithm::SHA1)->update('toRevision')->finalize();
+        $fromSha = Hash\Context::forAlgorithm(Hash\Algorithm::Sha1)->update('fromRevision')->finalize();
+        $toSha   = Hash\Context::forAlgorithm(Hash\Algorithm::Sha1)->update('toRevision')->finalize();
 
         $this->input->method('getOption')->willReturnMap([
             ['from', $fromSha],
@@ -449,8 +449,8 @@ final class AssertBackwardsCompatibleTest extends TestCase
     /** @dataProvider validVersionCollections */
     public function testExecuteWithDefaultRevisionsNotProvided(VersionCollection $versions): void
     {
-        $fromSha       = Hash\Context::forAlgorithm(Hash\Algorithm::SHA1)->update('fromRevision')->finalize();
-        $toSha         = Hash\Context::forAlgorithm(Hash\Algorithm::SHA1)->update('toRevision')->finalize();
+        $fromSha       = Hash\Context::forAlgorithm(Hash\Algorithm::Sha1)->update('fromRevision')->finalize();
+        $toSha         = Hash\Context::forAlgorithm(Hash\Algorithm::Sha1)->update('toRevision')->finalize();
         $pickedVersion = $this->makeVersion('1.0.0');
 
         $this->input->method('getOption')->willReturnMap([
