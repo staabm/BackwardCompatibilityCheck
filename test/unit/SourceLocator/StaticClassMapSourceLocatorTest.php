@@ -37,7 +37,7 @@ final class StaticClassMapSourceLocatorTest extends TestCase
     public function testRejectsEmptyKeys(): void
     {
         $this->expectException(CoercionException::class);
-        $this->expectExceptionMessage('Could not coerce "string" to type "non-empty-string".');
+        $this->expectExceptionMessage('Could not coerce "string" to type "dict<non-empty-string, non-empty-string>" at path "key()".');
 
         new StaticClassMapSourceLocator(
             ['' => __FILE__],
