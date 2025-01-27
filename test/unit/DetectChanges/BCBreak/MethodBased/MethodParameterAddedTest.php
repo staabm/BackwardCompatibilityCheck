@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace RoaveTest\BackwardCompatibility\DetectChanges\BCBreak\MethodBased;
 
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Roave\BackwardCompatibility\Change;
 use Roave\BackwardCompatibility\Changes;
@@ -21,7 +23,7 @@ use function array_map;
 use function assert;
 use function iterator_to_array;
 
-/** @covers \Roave\BackwardCompatibility\DetectChanges\BCBreak\MethodBased\MethodParameterAdded */
+#[CoversClass(MethodParameterAdded::class)]
 final class MethodParameterAddedTest extends TestCase
 {
     private MethodBased $methodCheck;
@@ -73,11 +75,8 @@ final class MethodParameterAddedTest extends TestCase
         self::assertEquals(Changes::empty(), ($this->methodCheck)($from, $to));
     }
 
-    /**
-     * @param string[] $expectedMessages
-     *
-     * @dataProvider methodsToBeTested
-     */
+    /** @param string[] $expectedMessages */
+    #[DataProvider('methodsToBeTested')]
     public function testDiffs(
         ReflectionMethod $fromMethod,
         ReflectionMethod $toMethod,

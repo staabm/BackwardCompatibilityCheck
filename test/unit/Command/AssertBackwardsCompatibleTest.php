@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace RoaveTest\BackwardCompatibility\Command;
 
 use LogicException;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psl\Env;
@@ -36,7 +38,7 @@ use Version\VersionCollection;
 use function assert;
 use function is_string;
 
-/** @covers \Roave\BackwardCompatibility\Command\AssertBackwardsCompatible */
+#[CoversClass(AssertBackwardsCompatible::class)]
 final class AssertBackwardsCompatibleTest extends TestCase
 {
     private CheckedOutRepository $sourceRepository;
@@ -301,7 +303,7 @@ final class AssertBackwardsCompatibleTest extends TestCase
         self::assertSame(0, $this->performCheckout->nonRemovedRepositoryCount());
     }
 
-    /** @dataProvider validVersionCollections */
+    #[DataProvider('validVersionCollections')]
     public function testExecuteWithDefaultRevisionsNotProvided(VersionCollection $versions): void
     {
         $fromSha       = Hash\Context::forAlgorithm(Hash\Algorithm::Sha1)->update('fromRevision')->finalize();

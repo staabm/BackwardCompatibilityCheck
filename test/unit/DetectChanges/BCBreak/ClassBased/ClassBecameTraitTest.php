@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace RoaveTest\BackwardCompatibility\DetectChanges\BCBreak\ClassBased;
 
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Roave\BackwardCompatibility\Change;
 use Roave\BackwardCompatibility\DetectChanges\BCBreak\ClassBased\ClassBecameTrait;
@@ -17,14 +19,11 @@ use function array_keys;
 use function array_map;
 use function iterator_to_array;
 
-/** @covers \Roave\BackwardCompatibility\DetectChanges\BCBreak\ClassBased\ClassBecameTrait */
+#[CoversClass(ClassBecameTrait::class)]
 final class ClassBecameTraitTest extends TestCase
 {
-    /**
-     * @param string[] $expectedMessages
-     *
-     * @dataProvider classesToBeTested
-     */
+    /** @param string[] $expectedMessages */
+    #[DataProvider('classesToBeTested')]
     public function testDiffs(
         ReflectionClass $fromClass,
         ReflectionClass $toClass,

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace RoaveTest\BackwardCompatibility\Git;
 
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Psl\Exception\InvariantViolationException;
 use Psl\Hash;
@@ -11,7 +13,7 @@ use Psl\SecureRandom;
 use Psl\Str;
 use Roave\BackwardCompatibility\Git\Revision;
 
-/** @covers \Roave\BackwardCompatibility\Git\Revision */
+#[CoversClass(Revision::class)]
 final class RevisionTest extends TestCase
 {
     public function testFromSha1WithValidSha1(): void
@@ -45,7 +47,7 @@ final class RevisionTest extends TestCase
         ];
     }
 
-    /** @dataProvider invalidRevisionProvider */
+    #[DataProvider('invalidRevisionProvider')]
     public function testInvalidSha1Rejected(string $invalidRevision): void
     {
         $this->expectException(InvariantViolationException::class);

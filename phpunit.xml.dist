@@ -5,6 +5,11 @@
     displayDetailsOnTestsThatTriggerDeprecations="true"
     bootstrap="test/bootstrap.php"
     colors="true"
+    failOnDeprecation="true"
+    failOnWarning="true"
+    failOnPhpunitDeprecation="true"
+    failOnNotice="true"
+    failOnEmptyTestSuite="true"
     cacheDirectory=".phpunit.cache"
 >
     <testsuites>
@@ -15,10 +20,10 @@
             <directory>./test/e2e</directory>
         </testsuite>
     </testsuites>
-
+    
     <source>
         <include>
-            <directory>./src</directory>
+            <directory>src</directory>
         </include>
     </source>
 

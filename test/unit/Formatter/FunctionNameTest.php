@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace RoaveTest\BackwardCompatibility\Formatter;
 
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Roave\BackwardCompatibility\Formatter\FunctionName;
 use Roave\BetterReflection\BetterReflection;
@@ -15,10 +17,10 @@ use Roave\BetterReflection\SourceLocator\Type\StringSourceLocator;
 
 use function assert;
 
-/** @covers \Roave\BackwardCompatibility\Formatter\FunctionName */
+#[CoversClass(FunctionName::class)]
 final class FunctionNameTest extends TestCase
 {
-    /** @dataProvider functionsToBeTested */
+    #[DataProvider('functionsToBeTested')]
     public function testName(ReflectionFunction|ReflectionMethod $function, string $expectedName): void
     {
         self::assertSame($expectedName, (new FunctionName())($function));
