@@ -1,8 +1,21 @@
 {
     "extensions": [
-        "bcmath"
+        "bcmath", "pcov"
     ],
     "ini": [
         "memory_limit=-1"
+    ],
+    "exclude": [
+        {"name": "Infection"}
+    ],
+    "additional_checks": [
+        {
+            "name": "Infection (PCOV)",
+            "job": {
+                "php": "@lowest",
+                "dependencies": "locked",
+                "command": "./vendor/bin/roave-infection-static-analysis-plugin"
+            }
+        }
     ]
 }

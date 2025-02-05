@@ -94,7 +94,7 @@ final class MethodParameterAddedTest extends TestCase
     }
 
     /** @return array<string, array{0: ReflectionMethod, 1: ReflectionMethod, 2: list<string>}> */
-    public function methodsToBeTested(): array
+    public static function methodsToBeTested(): array
     {
         $astLocator = (new BetterReflection())->astLocator();
 
