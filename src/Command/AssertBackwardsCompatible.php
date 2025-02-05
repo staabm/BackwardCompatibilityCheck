@@ -114,7 +114,9 @@ USAGE,
         $stdErr = $output->getErrorOutput();
 
         // @todo fix flaky assumption about the path of the source repo...
-        $sourceRepo = CheckedOutRepository::fromPath(Env\current_dir());
+        $currentDirectory = Env\current_dir();
+
+        $sourceRepo = CheckedOutRepository::fromPath($currentDirectory);
 
         $fromRevision = $input->getOption('from') !== null
             ? $this->parseRevisionFromInput($input, $sourceRepo)
@@ -125,6 +127,8 @@ USAGE,
         $includeDevelopmentDependencies = Type\bool()->coerce($input->getOption('install-development-dependencies'));
 
         $toRevision = $this->parseRevision->fromStringForRepository($to, $sourceRepo);
+
+        $configuration = (new DetermineConfigurationFromFilesystem())($currentDirectory, $stdErr);
 
         $stdErr->writeln(Str\format(
             'Comparing from %s to %s...',
@@ -149,7 +153,7 @@ USAGE,
                     $toPath->__toString(),
                     ($this->locateDependencies)($toPath->__toString(), $includeDevelopmentDependencies),
                 ),
-            );
+            )->applyBaseline($configuration->baseline);
 
             $formatters = [
                 'console'        => new SymfonyConsoleTextFormatter($stdErr),

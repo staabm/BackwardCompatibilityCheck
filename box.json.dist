@@ -10,6 +10,7 @@
     "main": "bin/roave-backward-compatibility-check.php",
     "output": "dist/roave-backward-compatibility-check.phar",
     "files-bin": [
+        "Resources/schema.xsd",
         "LICENSE",
         "vendor/composer/composer/LICENSE"
     ],
