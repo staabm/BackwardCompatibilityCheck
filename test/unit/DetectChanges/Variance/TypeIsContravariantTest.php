@@ -8,6 +8,8 @@ use PhpParser\Node\Identifier;
 use PhpParser\Node\IntersectionType;
 use PhpParser\Node\NullableType;
 use PhpParser\Node\UnionType;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Psl\Type;
 use Roave\BackwardCompatibility\DetectChanges\Variance\TypeIsContravariant;
@@ -24,10 +26,10 @@ use Roave\BetterReflection\SourceLocator\Type\StringSourceLocator;
 use function array_map;
 use function array_merge;
 
-/** @covers \Roave\BackwardCompatibility\DetectChanges\Variance\TypeIsContravariant */
+#[CoversClass(TypeIsContravariant::class)]
 final class TypeIsContravariantTest extends TestCase
 {
-    /** @dataProvider checkedTypes */
+    #[DataProvider('checkedTypes')]
     public function testContravariance(
         ReflectionIntersectionType|ReflectionUnionType|ReflectionNamedType|null $type,
         ReflectionIntersectionType|ReflectionUnionType|ReflectionNamedType|null $newType,
@@ -458,7 +460,7 @@ PHP
         );
     }
 
-    /** @dataProvider existingTypes */
+    #[DataProvider('existingTypes')]
     public function testContravarianceConsidersSameTypeAlwaysContravariant(
         ReflectionIntersectionType|ReflectionUnionType|ReflectionNamedType|null $type,
     ): void {
@@ -516,7 +518,7 @@ PHP
         );
     }
 
-    /** @dataProvider existingNullableTypeStrings */
+    #[DataProvider('existingNullableTypeStrings')]
     public function testContravarianceConsidersNullability(string $type): void
     {
         $reflector = new DefaultReflector(new StringSourceLocator(

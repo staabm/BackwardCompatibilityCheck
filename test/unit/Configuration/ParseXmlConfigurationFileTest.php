@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace RoaveTest\BackwardCompatibility\Configuration;
 
+use PHPUnit\Framework\Attributes\After;
+use PHPUnit\Framework\Attributes\Before;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Psl\Env;
 use Psl\File;
@@ -14,11 +18,12 @@ use Roave\BackwardCompatibility\Configuration\Configuration;
 use Roave\BackwardCompatibility\Configuration\InvalidConfigurationStructure;
 use Roave\BackwardCompatibility\Configuration\ParseXmlConfigurationFile;
 
+#[CoversClass(ParseXmlConfigurationFile::class)]
 final class ParseXmlConfigurationFileTest extends TestCase
 {
     private string $temporaryDirectory;
 
-    /** @before */
+    #[Before]
     public function prepareFilesystem(): void
     {
         $this->temporaryDirectory = Filesystem\create_temporary_file(
@@ -33,25 +38,22 @@ final class ParseXmlConfigurationFileTest extends TestCase
         Filesystem\create_directory($this->temporaryDirectory);
     }
 
-    /** @after */
+    #[After]
     public function cleanUpFilesystem(): void
     {
         Shell\execute('rm', ['-rf', $this->temporaryDirectory]);
     }
 
-    /** @test */
-    public function defaultConfigurationShouldBeUsedWhenFileDoesNotExist(): void
+    public function testDefaultConfigurationShouldBeUsedWhenFileDoesNotExist(): void
     {
         $config = (new ParseXmlConfigurationFile())->parse($this->temporaryDirectory);
 
         self::assertEquals(Configuration::default(), $config);
     }
 
-    /**
-     * @test
-     * @dataProvider invalidConfiguration
-     */
-    public function exceptionShouldBeRaisedWhenStructureIsInvalid(
+    /** @dataProvider invalidConfiguration */
+    #[DataProvider('invalidConfiguration')]
+    public function testExceptionShouldBeRaisedWhenStructureIsInvalid(
         string $xmlContents,
         string $expectedError,
     ): void {
@@ -122,11 +124,9 @@ XML,
         ];
     }
 
-    /**
-     * @test
-     * @dataProvider validConfiguration
-     */
-    public function baselineShouldBeParsed(
+    /** @dataProvider validConfiguration */
+    #[DataProvider('validConfiguration')]
+    public function testBaselineShouldBeParsed(
         string $xmlContents,
         Baseline $expectedBaseline,
     ): void {

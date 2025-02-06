@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace RoaveTest\BackwardCompatibility\Formatter;
 
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Psl\SecureRandom;
 use Psl\Str;
@@ -15,7 +16,7 @@ use Symfony\Component\Console\Output\BufferedOutput;
 
 use const PHP_EOL;
 
-/** @covers \Roave\BackwardCompatibility\Formatter\SymfonyConsoleTextFormatter */
+#[CoversClass(SymfonyConsoleTextFormatter::class)]
 final class SymfonyConsoleTextFormatterTest extends TestCase
 {
     /** @throws ReflectionException */

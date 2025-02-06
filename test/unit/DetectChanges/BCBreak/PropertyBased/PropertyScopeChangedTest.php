@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace RoaveTest\BackwardCompatibility\DetectChanges\BCBreak\PropertyBased;
 
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Roave\BackwardCompatibility\Change;
 use Roave\BackwardCompatibility\DetectChanges\BCBreak\PropertyBased\PropertyScopeChanged;
@@ -18,14 +20,11 @@ use function array_keys;
 use function array_map;
 use function iterator_to_array;
 
-/** @covers \Roave\BackwardCompatibility\DetectChanges\BCBreak\PropertyBased\PropertyScopeChanged */
+#[CoversClass(PropertyScopeChanged::class)]
 final class PropertyScopeChangedTest extends TestCase
 {
-    /**
-     * @param string[] $expectedMessages
-     *
-     * @dataProvider propertiesToBeTested
-     */
+    /** @param string[] $expectedMessages */
+    #[DataProvider('propertiesToBeTested')]
     public function testDiffs(
         ReflectionProperty $fromFunction,
         ReflectionProperty $toFunction,

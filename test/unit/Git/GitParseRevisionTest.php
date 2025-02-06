@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace RoaveTest\BackwardCompatibility\Git;
 
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Roave\BackwardCompatibility\Git\CheckedOutRepository;
 use Roave\BackwardCompatibility\Git\GitParseRevision;
 
-/** @covers \Roave\BackwardCompatibility\Git\GitParseRevision */
+#[CoversClass(GitParseRevision::class)]
 final class GitParseRevisionTest extends TestCase
 {
     /** @return string[][] */
@@ -19,7 +21,7 @@ final class GitParseRevisionTest extends TestCase
         ];
     }
 
-    /** @dataProvider revisionProvider */
+    #[DataProvider('revisionProvider')]
     public function testFromStringForRepository(string $revisionToBeParsed, string $expectedRevision): void
     {
         self::assertSame(
