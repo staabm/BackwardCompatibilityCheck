@@ -71,6 +71,11 @@ final class Change
         return $this->modificationType === self::SKIPPED;
     }
 
+    public function getModificationType(): string
+    {
+        return $this->modificationType;
+    }
+
     /** @internal */
     public function withFilePositionsIfNotAlreadySet(
         string|null $file,

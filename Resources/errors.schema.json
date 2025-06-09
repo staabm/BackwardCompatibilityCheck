@@ -52,6 +52,9 @@
               "type": "null"
             }
           ]
+        },
+        "modificationType": {
+          "type": "string"
         }
       },
       "required": [
