@@ -31,6 +31,7 @@ final class JsonFormatter implements OutputFormatter
                 'path' => $change->file === null ? null : Str\replace($change->file, $basePath, ''),
                 'line' => $change->line,
                 'column' => $change->column,
+                'modificationType' => $change->getModificationType(),
             ];
         }
 

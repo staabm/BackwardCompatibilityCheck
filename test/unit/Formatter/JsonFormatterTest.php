@@ -63,13 +63,13 @@ final class JsonFormatterTest extends TestCase
 
         $expected = [
             'errors' => [
-                ['description' => 'foo', 'path' => null, 'line' => null, 'column' => null],
-                ['description' => 'bar', 'path' => null, 'line' => null, 'column' => null],
-                ['description' => 'baz', 'path' => 'baz-file.php', 'line' => null, 'column' => null],
-                ['description' => 'tab', 'path' => 'tab-file.php', 'line' => 5, 'column' => null],
-                ['description' => 'taz', 'path' => 'taz-file.php', 'line' => 6, 'column' => 15],
-                ['description' => 'tar', 'path' => 'tar-file.php', 'line' => -1, 'column' => -1],
-                ['description' => 'file-in-checked-out-dir', 'path' => 'subpath/file-in-checked-out-dir.php', 'line' => 10, 'column' => 20],
+                ['description' => 'foo', 'path' => null, 'line' => null, 'column' => null, 'modificationType' => 'removed'],
+                ['description' => 'bar', 'path' => null, 'line' => null, 'column' => null, 'modificationType' => 'added'],
+                ['description' => 'baz', 'path' => 'baz-file.php', 'line' => null, 'column' => null, 'modificationType' => 'changed'],
+                ['description' => 'tab', 'path' => 'tab-file.php', 'line' => 5, 'column' => null, 'modificationType' => 'changed'],
+                ['description' => 'taz', 'path' => 'taz-file.php', 'line' => 6, 'column' => 15, 'modificationType' => 'changed'],
+                ['description' => 'tar', 'path' => 'tar-file.php', 'line' => -1, 'column' => -1, 'modificationType' => 'changed'],
+                ['description' => 'file-in-checked-out-dir', 'path' => 'subpath/file-in-checked-out-dir.php', 'line' => 10, 'column' => 20, 'modificationType' => 'changed'],
             ],
         ];
 
@@ -86,7 +86,7 @@ final class JsonFormatterTest extends TestCase
 
         self::assertJsonStringEqualsJsonString(
             <<<'OUTPUT'
-{"errors":[{"description":"foo","path":null,"line":null,"column":null},{"description":"bar","path":null,"line":null,"column":null},{"description":"baz","path":"baz-file.php","line":null,"column":null},{"description":"tab","path":"tab-file.php","line":5,"column":null},{"description":"taz","path":"taz-file.php","line":6,"column":15},{"description":"tar","path":"tar-file.php","line":-1,"column":-1},{"description":"file-in-checked-out-dir","path":"subpath\/file-in-checked-out-dir.php","line":10,"column":20}]}
+{"errors":[{"description":"foo","path":null,"line":null,"column":null,"modificationType":"removed"},{"description":"bar","path":null,"line":null,"column":null,"modificationType":"added"},{"description":"baz","path":"baz-file.php","line":null,"column":null,"modificationType":"changed"},{"description":"tab","path":"tab-file.php","line":5,"column":null,"modificationType":"changed"},{"description":"taz","path":"taz-file.php","line":6,"column":15,"modificationType":"changed"},{"description":"tar","path":"tar-file.php","line":-1,"column":-1,"modificationType":"changed"},{"description":"file-in-checked-out-dir","path":"subpath\/file-in-checked-out-dir.php","line":10,"column":20,"modificationType":"changed"}]}
 
 OUTPUT
             ,
